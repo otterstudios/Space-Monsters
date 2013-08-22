@@ -33,7 +33,7 @@ local cLevel = settings.currentLevel
 local clockTimer = system.getTimer()
 
 
---cLevel = 50
+cLevel = 5
 
 local gameIsActive = false
 
