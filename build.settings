@@ -1,0 +1,76 @@
+settings =
+{
+
+	androidPermissions =
+   {
+       "android.permission.VIBRATE"
+
+
+
+   },
+
+        orientation =
+        {
+                default = "portrait",
+                content = "portrait",
+                supported = { "portrait"},
+        },
+
+--        orientation =
+--        {
+--                default = "landscapeRight",
+--                content = "landscapeRight",
+--                supported = { "landscapeRight"},
+--        },
+--
+        android =
+    {
+        usesPermissions =
+        {
+
+            "android.permission.INTERNET",
+            "android.permission.ACCESS_WIFI_STATE",
+            "android.permission.READ_PHONE_STATE",
+            "android.permission.ACCESS_NETWORK_STATE"
+            --"com.android.vending.BILLING",
+        },
+    },
+
+        iphone =
+        {		
+                 plist =
+                {
+				UIPrerenderedIcon = true,
+                FacebookAppID = "338050362964660",
+                 CoronaUseIOS6LandscapeOnlyWorkaround = true,
+
+				MinimumOSVersion="4.3",
+                UIApplicationExitsOnSuspend = false,
+				UIAppFonts = 
+                        {
+                        "Montserrat-Bold.ttf"
+
+                        },
+
+				CFBundleURLTypes =
+            {
+                {
+                    CFBundleURLSchemes =
+                    {
+                        "fb338050362964660",
+                    }
+                }
+            },
+                       CFBundleIconFile = "Icon.png",
+                        CFBundleIconFiles = {
+                                "Icon.png" , 
+                                "Icon@2x.png" , 
+                                "Icon-72.png" ,
+                                "Icon-72@2x.png" ,
+                                "Icon-Small-50.png" , 
+                                "Icon-Small.png" , 
+                                "Icon-Small@2x.png"
+                        },
+                },
+        }
+}
