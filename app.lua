@@ -167,11 +167,16 @@ local function onComplete(event)
 
 end
 
+    local extra = math.round((v.fuelLeft/v.fuel*100)*cLevel)
 
-    native.showAlert("Nice one!", "You completed level "..cLevel.."!", {"Next"}, onComplete)
+    native.showAlert("Nice one!", "You completed level "..cLevel..". Fuel Bonus: "..extra, {"Next"}, onComplete)
     gameIsActive = false
 
-    v.score = v.score + math.round((v.fuelLeft/v.fuel)*100)*cLevel
+
+
+    print ("EXTRA: "..extra)
+
+    v.score = v.score + extra
     updateScore()
 
     settings.currentLevel = settings.currentLevel + 1
@@ -205,7 +210,7 @@ local decideTarget = function()
     local rn = math.random(5, 15)/10
     v.next = 10
     v.force = 25 + c
-    v.fuel = v.totalTarget * 50 - (c*5)
+    v.fuel = v.totalTarget * 40 - (c*10)
     v.fuelLeft = v.fuel
 
 
@@ -317,7 +322,7 @@ local touchOil = function (event)
 
         obj.active = false
 
-        v.fuelLeft = v.fuelLeft + 40
+        v.fuelLeft = v.fuelLeft + 20 * cLevel
         if v.fuelLeft > v.fuel then v.fuelLeft = v.fuel; end
         doink(hud.fuel)
         transition.to(obj, {time = tm, xScale = 2, yScale = 2, transition = easing.inOutExpo})
@@ -377,7 +382,7 @@ local touchMonster = function (event)
 
                 v.targets[a].tgt = v.targets[a].tgt - 1
                  v.got = v.got + 1
-                 v.score = v.score + math.round((v.score + 500 - obj.y)/10)
+                 v.score = v.score + math.round((500 - obj.y)/10)
                  updateScore()
                 end
 
@@ -433,7 +438,7 @@ local touchMonster = function (event)
 
 
 
-        v.fuelLeft = v.fuelLeft - 40
+        v.fuelLeft = v.fuelLeft - 20 * cLevel
         doink(hud.fuel)
 
         end
@@ -487,7 +492,7 @@ local spawnMonster = function()
     local rn = math.random(5, 15)/10
     v.next = v.time * rn
 
-    local up = math.floor(cLevel/4) + 3
+    local up = math.floor(cLevel/5) + 3
 
     local isTM = math.random(1, up)
     local isTC = math.random(1,up)
@@ -519,7 +524,7 @@ local spawnMonster = function()
 
     if isTC ~= 1 or isTM ~= 1 then
          countWithout = countWithout + 1
-         --print ("WITHOUT: "..countWithout)
+         print ("WITHOUT: "..countWithout)
          if countWithout == 12 + cLevel then
             chg = 0
             countWithout = 0
@@ -612,7 +617,7 @@ local spawnOil = function ()
     local xo = math.random(-5,5)
      local yo = math.random(-5,5)
 
-    local ff = math.random(8, 12)/5
+    local ff = math.random(4, 10)/6
     local xf = math.random(4,4)
 
     i:applyForce(xf, ff * v.force , i.x + xo, i.y + yo)
@@ -632,7 +637,7 @@ local halfSecond = function ()
     v.fuelLeft = v.fuelLeft - 1
     updateFuel()
 
-    local oc = math.random(1,100+cLevel)
+    local oc = math.random(1,120+(cLevel*5))
 
     if oc == 5 then
 
